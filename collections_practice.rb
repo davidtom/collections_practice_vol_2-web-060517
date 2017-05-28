@@ -1,3 +1,5 @@
+require "pry"
+
 def begins_with_r (array)
   array.each do |e|
     if e.start_with?("r")
@@ -52,6 +54,93 @@ def count_elements (array)
 end
 
 
-def merge_data (array)
+def merge_data (key_array, data_array)
+  new_array = Array.new
+  data_array[0].each {|key, value|
+    key_array.each {|e|
+      new_array << e.merge(value) if e[:first_name] == key
+      ## NEED AN IF STATMENT HERE TO MAKE SURE THE RIGHT HASHES ARE MERGED
+    }
+  }
+  new_array
+end
 
+def find_cool(array)
+  cool_people = []
+  array.each { |person|
+    cool_people << person if person[:temperature] == "cool"
+  }
+  cool_people
+end
+
+def organize_schools(schools)
+  organized_hash = Hash.new
+  schools.each { |key, value|
+    if organized_hash.keys.include?(value[:location])
+      organized_hash[value[:location]] << key
+    else
+      organized_hash[value[:location]] = [key]
+    end
+  }
+  organized_hash
+end
+
+keys = [
+       {
+        :first_name => "blake"
+    },
+       {
+        :first_name => "ashley"
+    }
+]
+
+data = [
+       {
+         "blake" => {
+            :awesomeness => 10,
+                 :height => "74",
+              :last_name => "johnson"
+        },
+        "ashley" => {
+            :awesomeness => 9,
+                 :height => 60,
+              :last_name => "dubs"
+        }
+    }
+]
+
+def cool
+  [
+        {
+               :name => "ashley",
+        :temperature => "sort of cool"
+    },
+        {
+               :name => "blake",
+        :temperature => "cool"
+    }
+  ]
+end
+
+def schools
+  {
+    "flatiron school bk" => {
+      :location => "NYC"
+    },
+    "flatiron school" => {
+      :location => "NYC"
+    },
+    "dev boot camp" => {
+      :location => "SF"
+    },
+    "dev boot camp chicago" => {
+      :location => "Chicago"
+    },
+    "general assembly" => {
+      :location => "NYC"
+    },
+    "Hack Reactor" => {
+      :location => "SF"
+    }
+  }
 end
